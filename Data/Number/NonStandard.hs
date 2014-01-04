@@ -1,4 +1,4 @@
-{-# LANGUAGE DataKinds, DeriveFunctor, FlexibleInstances, GADTs, KindSignatures, StandaloneDeriving #-}
+{-# LANGUAGE DataKinds, FlexibleInstances, GADTs, KindSignatures, StandaloneDeriving #-}
 
 module Data.Number.NonStandard ( NonStandard(..) ) where
 
