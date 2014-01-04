@@ -2,6 +2,9 @@
 
 module Data.Number.NonStandard ( NonStandard(..) ) where
 
+-- non-standard numbers with alpha^n = 0
+-- (or equivalently: 0 != alpha = nth root of 0)
+
 data {- kind -} Nat = Z | S Nat
 
 data NonStandard :: Nat -> * -> * where
@@ -25,3 +28,5 @@ standardPart (Non rest _) = standardPart rest
 standardPart (Standard a) = a
 
 st = standardPart
+
+-- Multiplication is n-truncated convolution
