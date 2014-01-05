@@ -1,4 +1,4 @@
-{-# LANGUAGE DataKinds, ExplicitNamespaces, FlexibleInstances,
+{-# LANGUAGE DataKinds, FlexibleInstances,
              GADTs, KindSignatures, StandaloneDeriving #-}
 
 module Data.Number.NonStandard ( NonStandard, Z, S ) where
