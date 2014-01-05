@@ -37,5 +37,6 @@ add :: Num a => NonStandard n a -> NonStandard n a -> NonStandard n a
 Standard a `add` Standard b = Standard $ a + b
 Standard a `add` Non (Standard b') b = Non (Standard $ a + b') b
 Standard a `add` Non pre@Non{} b = Non (Standard a `add` pre) b
+--TODO: Non + sthg
 
 -- Multiplication is n-truncated convolution
