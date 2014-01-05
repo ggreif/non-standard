@@ -29,4 +29,7 @@ standardPart (Standard a) = a
 
 st = standardPart
 
+add :: Num a => NonStandard n a -> NonStandard n a -> NonStandard n a
+Standard a `add` Standard b = Standard $ a + b
+
 -- Multiplication is n-truncated convolution
