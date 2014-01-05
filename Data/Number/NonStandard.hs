@@ -17,6 +17,7 @@ data NonStandard :: Nat -> * -> * where
 deriving instance Show a => Show (NonStandard n a)
 instance Functor (NonStandard n) where
   fmap f (Standard a) = Standard $ f a
+  fmap f (Non pre a) = Non (fmap f pre) (f a)
 
 instance Num a => Num (NonStandard (S n) a) where
   (+) = add
@@ -34,5 +35,7 @@ st = standardPart
 
 add :: Num a => NonStandard n a -> NonStandard n a -> NonStandard n a
 Standard a `add` Standard b = Standard $ a + b
+Standard a `add` Non (Standard b') b = Non (Standard $ a + b') b
+Standard a `add` Non pre@(Non{}) b = Non (Standard a `add` pre) b
 
 -- Multiplication is n-truncated convolution
