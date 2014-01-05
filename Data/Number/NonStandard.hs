@@ -20,7 +20,7 @@ instance Functor (NonStandard n) where
   fmap f (Non pre a) = Non (fmap f pre) (f a)
 
 instance Num a => Num (NonStandard (S n) a) where
-  (+) = add
+  lhs + rhs = fst $ lhs `add` rhs
   (*) = undefined
   negate = fmap negate
   signum = undefined
@@ -33,10 +33,11 @@ standardPart (Standard a) = a
 
 st = standardPart
 
-add :: Num a => NonStandard n a -> NonStandard n a -> NonStandard n a
-Standard a `add` Standard b = Standard $ a + b
-Standard a `add` Non (Standard b') b = Non (Standard $ a + b') b
-Standard a `add` Non pre@Non{} b = Non (Standard a `add` pre) b
---TODO: Non + sthg
+add :: Num a => NonStandard n a -> NonStandard n a -> (NonStandard n a, Bool)
+Standard a `add` Standard b = (Standard $ a + b, False)
+Standard a `add` Non (Standard b') b = (Non (Standard $ a + b') b, False)
+Standard a `add` Non pre@Non{} b = (Non (fst (Standard a `add` pre)) b, False)
+a@Non{} `add` b@Standard{} = (fst $ b `add` a, True)
+--TODO: Non + Non
 
 -- Multiplication is n-truncated convolution
