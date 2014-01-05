@@ -16,7 +16,7 @@ instance Functor (NonStandard n) where
   fmap f (Standard a) = Standard $ f a
 
 instance Num a => Num (NonStandard (S n) a) where
-  (+) = undefined
+  (+) = add
   (*) = undefined
   negate = fmap negate
   signum = undefined
