@@ -1,11 +1,14 @@
-{-# LANGUAGE DataKinds, FlexibleInstances, GADTs, KindSignatures, StandaloneDeriving #-}
+{-# LANGUAGE DataKinds, ExplicitNamespaces, FlexibleInstances,
+             GADTs, KindSignatures, StandaloneDeriving #-}
 
-module Data.Number.NonStandard ( NonStandard(..) ) where
+module Data.Number.NonStandard ( NonStandard, Z, S ) where
 
 -- non-standard numbers with alpha^n = 0
 -- (or equivalently: 0 != alpha = nth root of 0)
 
 data {- kind -} Nat = Z | S Nat
+type Z = 'Z
+type S = 'S
 
 data NonStandard :: Nat -> * -> * where
   Standard :: a -> NonStandard (S n) a
