@@ -1,4 +1,4 @@
-{-# LANGUAGE DataKinds, FlexibleInstances,
+{-# LANGUAGE DataKinds, FlexibleInstances, DeriveFunctor,
              GADTs, KindSignatures, StandaloneDeriving #-}
 
 module Data.Number.NonStandard ( NonStandard, Z, S ) where
@@ -15,9 +15,13 @@ data NonStandard :: Nat -> * -> * where
   Non :: NonStandard n a -> a -> NonStandard (S n) a
 
 deriving instance Show a => Show (NonStandard n a)
+
+deriving instance Functor (NonStandard n)
+{-
 instance Functor (NonStandard n) where
   fmap f (Standard a) = Standard $ f a
   fmap f (Non pre a) = Non (fmap f pre) (f a)
+-}
 
 instance Num a => Num (NonStandard (S n) a) where
   lhs + rhs = fst $ lhs `add` rhs
